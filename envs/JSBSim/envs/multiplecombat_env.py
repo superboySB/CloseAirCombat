@@ -39,7 +39,8 @@ class MultipleCombatEnv(BaseEnv):
         self.reset_simulators()
         self.task.reset(self)
         obs = self.get_obs()
-        share_obs = self.get_state()
+        # share_obs = self.get_state()
+        share_obs = self.get_obs() # [superboySB] 不使用share obs训练共享critic网络
         return self._pack(obs), self._pack(share_obs)
 
     def reset_simulators(self):
@@ -81,7 +82,8 @@ class MultipleCombatEnv(BaseEnv):
                 sim.run()
         self.task.step(self)
         obs = self.get_obs()
-        share_obs = self.get_state()
+        # share_obs = self.get_state()
+        share_obs = self.get_obs() # [superboySB] 不使用share obs训练共享critic网络
 
         rewards = {}
         for agent_id in self.agents.keys():

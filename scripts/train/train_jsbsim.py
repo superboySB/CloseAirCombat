@@ -154,6 +154,7 @@ def main(args):
         else:
             from runner.jsbsim_runner import JSBSimRunner as Runner
         runner = Runner(config)
+        
     try:
         runner.run()
     except BaseException:

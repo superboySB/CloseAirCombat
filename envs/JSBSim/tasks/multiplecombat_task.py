@@ -71,7 +71,8 @@ class MultipleCombatTask(SingleCombatTask):
     def load_observation_space(self):
         self.obs_length = 9 + (self.num_agents - 1) * 6
         self.observation_space = spaces.Box(low=-10, high=10., shape=(self.obs_length,))
-        self.share_observation_space = spaces.Box(low=-10, high=10., shape=(self.num_agents * self.obs_length,))
+        # self.share_observation_space = spaces.Box(low=-10, high=10., shape=(self.num_agents * self.obs_length,))
+        self.share_observation_space = self.observation_space
 
     def load_action_space(self):
         # aileron, elevator, rudder, throttle
@@ -189,7 +190,8 @@ class HierarchicalMultipleCombatShootTask(HierarchicalMultipleCombatTask):
     def load_observation_space(self):
         self.obs_length = 9 + self.num_agents  * 6
         self.observation_space = spaces.Box(low=-10, high=10., shape=(self.obs_length,))
-        self.share_observation_space = spaces.Box(low=-10, high=10., shape=(self.num_agents * self.obs_length,))
+        # self.share_observation_space = spaces.Box(low=-10, high=10., shape=(self.num_agents * self.obs_length,))
+        self.share_observation_space = self.observation_space
     
     def load_action_space(self):
         self.action_space = spaces.MultiDiscrete([3, 5, 3, 2])

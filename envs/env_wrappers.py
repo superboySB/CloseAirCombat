@@ -340,7 +340,7 @@ class ShareDummyVecEnv(DummyVecEnv, ShareVecEnv):
     def __init__(self, env_fns):
         self.envs = [fn() for fn in env_fns]
         env = self.envs[0]
-        ShareVecEnv.__init__(self, len(self.envs), env.observation_space, env.share_observation_space, env.action_space)
+        ShareVecEnv.__init__(self, len(self.envs), env.observation_space, env.observation_space, env.action_space)
         self.actions = None
         self.num_agents = getattr(self.envs[0], "num_agents", 1)
 
@@ -405,7 +405,7 @@ def shareworker(remote: Connection, parent_remote: Connection, env_fn_wrappers):
                 remote.close()
                 break
             elif cmd == 'get_spaces':
-                remote.send(CloudpickleWrapper((envs[0].observation_space, envs[0].share_observation_space, envs[0].action_space)))
+                remote.send(CloudpickleWrapper((envs[0].observation_space, envs[0].observation_space, envs[0].action_space)))
             elif cmd == 'get_num_agents':
                 remote.send(CloudpickleWrapper((getattr(envs[0], "num_agents", 1))))
             else:
